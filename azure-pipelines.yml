@@ -85,3 +85,16 @@ stages:
               azureSubscription: $(azureServiceConnectionId)
               appName: $(webAppName)
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+          - script: |
+              python -m pip install --upgrade pip
+              pip install setup
+              pip install -r requirements.txt
+              pip install --upgrade flask werkzeug
+              python -m unittest discover -s tests -p 'test.py'
+            workingDirectory: $(projectRoot)
+            displayName: 'Execute test case'
+          - task: PublishTestResults@2
+              inputs:
+                testResultsFormat: 'JUnit' 
+                testResultsFiles: '**/TEST-*.xml' 
+              
