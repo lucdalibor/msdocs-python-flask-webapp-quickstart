@@ -94,7 +94,7 @@ stages:
             workingDirectory: $(projectRoot)
             displayName: 'Execute test case'
           - task: PublishTestResults@2
-              inputs:
-                testResultsFormat: 'JUnit' 
-                testResultsFiles: '**/TEST-*.xml' 
+            inputs:
+              testResultsFormat: 'JUnit' 
+              testResultsFiles: '**/TEST-*.xml' 
               
